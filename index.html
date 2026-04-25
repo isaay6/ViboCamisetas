@@ -3,160 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViboCamisetas | La Tienda de los Fans de Fútbol</title>
-    <meta name="description" content="Encuentra las mejores camisetas de fútbol en ViboCamisetas. Calidad premium y atención personalizada.">
+    <title>ViboCamisetas | Oficial</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+    <!-- Botón Menú (Tres Rayas) -->
+    <button id="hamburger" class="hamburger-menu" onclick="toggleSidebar()" aria-label="Abrir menú">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
+
     <header>
-        <button class="menu-toggle" onclick="toggleSidebar()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <h1 class="logo">VIBOCAMISETAS</h1>
-        <p class="subtitle">Equipaciones de alta calidad para verdaderos apasionados</p>
-        
-        <div class="catalog-banner">
-            <p>👟 También tenemos <b>Tenis, Bolsos y más</b>. ¡Pregunta sin compromiso por privado!</p>
-        </div>
+        <p class="subtitle">La tienda de los apasionados del fútbol</p>
+        <div class="catalog-info">Tenis, Bolsos y más disponibles por privado</div>
     </header>
 
-    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
-    <nav id="sidebar" class="sidebar">
+    <!-- Menú Lateral -->
+    <div id="overlay" class="menu-overlay" onclick="toggleSidebar()"></div>
+    <nav id="sidebar" class="sidebar-nav">
         <div class="sidebar-header">
-            <h3>Categorías</h3>
-            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+            <h2>SECCIONES</h2>
+            <button class="close-btn" onclick="toggleSidebar()">&times;</button>
         </div>
-        <div class="sidebar-content">
-            <button class="side-btn active" onclick="filterCategory('all')">Todo</button>
-            <button class="side-btn" onclick="filterCategory('LaLiga')">LaLiga</button>
-            <button class="side-btn" onclick="filterCategory('Premier League')">Premier League</button>
-            <button class="side-btn" onclick="filterCategory('Bundesliga')">Bundesliga</button>
-            <button class="side-btn" onclick="filterCategory('Serie A')">Serie A</button>
-            <button class="side-btn" onclick="filterCategory('Ligue 1')">Ligue 1</button>
-            <button class="side-btn" onclick="filterCategory('Retro')">Retro</button>
-            <button class="side-btn" onclick="filterCategory('MIX')">MIX</button>
-            <button class="side-btn" onclick="filterCategory('Chándal')">Chándal</button>
-            <button class="side-btn" onclick="filterCategory('Suits / Conjuntos')">Conjuntos</button>
-            <button class="side-btn" onclick="filterCategory('Chaquetas')">Chaquetas</button>
-            <button class="side-btn" onclick="filterCategory('Fórmula 1')">Fórmula 1</button>
-            <button class="side-btn" onclick="filterCategory('NBA / NFL')">NBA / NFL</button>
-            <button class="side-btn" onclick="filterCategory('World Cup')">World Cup</button>
-        </div>
-        <div class="sidebar-footer">
-            <button class="side-btn price-btn" onclick="openPreciosModal()">💰 Precios</button>
-            <button class="side-btn guide-btn" onclick="openTallasModal()">📏 Tallas</button>
+        <div class="sidebar-links">
+            <button onclick="filterCategory('all')" class="nav-link active">Todo el Catálogo</button>
+            <button onclick="filterCategory('LaLiga')" class="nav-link">LaLiga</button>
+            <button onclick="filterCategory('Premier League')" class="nav-link">Premier League</button>
+            <button onclick="filterCategory('Bundesliga')" class="nav-link">Bundesliga</button>
+            <button onclick="filterCategory('Serie A')" class="nav-link">Serie A</button>
+            <button onclick="filterCategory('Ligue 1')" class="nav-link">Ligue 1</button>
+            <button onclick="filterCategory('Retro')" class="nav-link">Colección Retro</button>
+            <button onclick="filterCategory('MIX')" class="nav-link">Sección MIX</button>
+            <button onclick="filterCategory('Chándal')" class="nav-link">Chándales</button>
+            <button onclick="filterCategory('Suits / Conjuntos')" class="nav-link">Conjuntos</button>
+            <button onclick="filterCategory('Chaquetas')" class="nav-link">Chaquetas y Parkas</button>
+            <button onclick="filterCategory('Fórmula 1')" class="nav-link">Fórmula 1</button>
+            <button onclick="filterCategory('NBA / NFL')" class="nav-link">NBA / NFL</button>
+            <button onclick="filterCategory('World Cup')" class="nav-link">World Cup</button>
+            <hr>
+            <button onclick="openPreciosModal()" class="nav-link highlight">💰 Tarifas / Precios</button>
+            <button onclick="openTallasModal()" class="nav-link highlight">📏 Guía de Tallas</button>
         </div>
     </nav>
 
-    <main id="gallery" class="products-container">
-        <!-- Products will be injected here -->
-        <div id="loader">
-            <div class="spinner"></div>
-            <p>Cargando camisetas...</p>
-        </div>
+    <main id="gallery" class="products-grid">
+        <!-- Los productos se cargan aquí -->
     </main>
 
-    <section id="faq" class="faq-section">
-        <h2>Preguntas Frecuentes</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">¿Cuánto tarda el envío? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Los pedidos suelen tardar entre 10 y 15 días laborables, ya que vienen directos de fábrica para garantizar el mejor precio.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">¿Se pueden personalizar? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">¡Sí! Puedes poner el nombre y número que quieras, además de los parches oficiales de las ligas o Champions.</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">¿Hacéis envíos a toda España? <span class="faq-icon">+</span></div>
-                <div class="faq-answer">Enviamos a toda la península, Baleares y Canarias. Consulta tarifas de envío por privado.</div>
-            </div>
+    <section class="faq">
+        <h3>Preguntas Frecuentes</h3>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="q">¿Tiempos de envío? <span>+</span></div>
+            <div class="a">Entre 10 y 15 días laborables directamente a tu casa.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="q">¿Son personalizables? <span>+</span></div>
+            <div class="a">Sí, cualquier nombre y número de jugador o el tuyo propio.</div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 ViboCamisetas - Todos los derechos reservados.</p>
-        <p>Pasión por el fútbol, calidad en cada detalle.</p>
+        <p>&copy; 2026 ViboCamisetas</p>
     </footer>
 
-    <!-- Activity Notification -->
-    <div id="activityNotify" class="activity-notification">
-        <div class="notify-icon">⚽</div>
-        <div class="notify-content">
-            <p id="notifyText">Alguien está mirando la colección Retro...</p>
-        </div>
-    </div>
+    <!-- Botón Subir Arriba (Inferior Izquierda) -->
+    <button id="backToTop" class="btn-up" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Subir">
+        ↑
+    </button>
 
-    <!-- Modal for Precios -->
-    <div id="preciosModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closePreciosModal()">&times;</span>
-            <h2>Nuestras Tarifas</h2>
-            <div class="price-list">
-                <div class="price-item">
-                    <span>Camisetas Actuales</span>
-                    <span class="price-value">20€</span>
-                </div>
-                <div class="price-item">
-                    <span>Camisetas Retro</span>
-                    <span class="price-value">25€</span>
-                </div>
-                <div class="price-item">
-                    <span>Player Version</span>
-                    <span class="price-value">25€</span>
-                </div>
-            </div>
-            <p class="price-note">Para saber los precios de cualquier otro producto (tenis, bolsos, chándales...), consúltame sin compromiso.</p>
-            <div style="margin-top: 1.5rem;">
-                <a href="https://wa.me/34605026578" target="_blank" class="whatsapp-btn">
-                    Contactar para más info
-                </a>
-            </div>
-        </div>
-    </div>
+    <!-- Botón WhatsApp (Inferior Derecha) -->
+    <a href="https://wa.me/34605026578" class="btn-whatsapp" target="_blank">
+        WhatsApp
+    </a>
 
-    <!-- Modal for Tallas -->
-    <div id="tallasModal" class="modal">
-        <div class="modal-content tallas-content">
-            <span class="modal-close" onclick="closeTallasModal()">&times;</span>
-            <h2>Guía de Tallas</h2>
-            <div id="tallasGallery" class="tallas-grid">
-                <!-- Size images will be injected here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Product Detail Modal -->
+    <!-- Modales -->
     <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" class="modal-image" src="" alt="Product">
-            <div class="modal-details">
-                <p id="modalCategory" class="category-info"></p>
-            </div>
-            <div class="custom-notice">
-                <p>⭐ Personalización disponible (Nombre, dorsal y parches oficiales).</p>
-            </div>
-            <a id="whatsappLink" href="#" target="_blank" class="whatsapp-btn">
-                Preguntar por WhatsApp
-            </a>
+        <div class="modal-box">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Producto">
+            <p id="modalInfo"></p>
+            <a id="modalWa" href="#" target="_blank" class="wa-order">Preguntar por WhatsApp</a>
         </div>
     </div>
+
+    <div id="preciosModal" class="modal">
+        <div class="modal-box">
+            <span class="close" onclick="closePreciosModal()">&times;</span>
+            <h2>Precios</h2>
+            <ul class="price-list">
+                <li>Actuales: 20€</li>
+                <li>Retro: 25€</li>
+                <li>Player Version: 25€</li>
+            </ul>
+            <p>Otros productos: Consultar por privado.</p>
+        </div>
+    </div>
+
+    <div id="tallasModal" class="modal">
+        <div class="modal-box large">
+            <span class="close" onclick="closeTallasModal()">&times;</span>
+            <h2>Medidas y Tallas</h2>
+            <div id="tallasGallery" class="tallas-flex"></div>
+        </div>
+    </div>
+
+    <div id="activityNotify" class="notify"></div>
 
     <script src="products.js"></script>
     <script src="scripts.js"></script>
-    
-    <!-- Global Floating WhatsApp Button -->
-    <a href="https://wa.me/34605026578" class="floating-contact" target="_blank">
-        <span>Contactar</span>
-    </a>
-
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        ↑
-    </button>
 </body>
 </html>
