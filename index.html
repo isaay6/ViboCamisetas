@@ -10,7 +10,12 @@
 <body>
 
     <header>
-        <div class="logo">VIBOCAMISETAS</div>
+        <button class="menu-toggle" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <h1 class="logo">VIBOCAMISETAS</h1>
         <p class="subtitle">Equipaciones de alta calidad para verdaderos apasionados</p>
         
         <div class="catalog-banner">
@@ -18,23 +23,32 @@
         </div>
     </header>
 
-    <nav class="categories-nav">
-        <button class="category-btn active" onclick="filterCategory('all')">Todo</button>
-        <button class="category-btn" onclick="filterCategory('LaLiga')">LaLiga</button>
-        <button class="category-btn" onclick="filterCategory('Premier League')">Premier</button>
-        <button class="category-btn" onclick="filterCategory('Bundesliga')">Bundesliga</button>
-        <button class="category-btn" onclick="filterCategory('Serie A')">Serie A</button>
-        <button class="category-btn" onclick="filterCategory('Ligue 1')">Ligue 1</button>
-        <button class="category-btn" onclick="filterCategory('Retro')">Retro</button>
-        <button class="category-btn" onclick="filterCategory('MIX')">MIX</button>
-        <button class="category-btn" onclick="filterCategory('Chándal')">Chándal</button>
-        <button class="category-btn" onclick="filterCategory('Suits / Conjuntos')">Conjuntos</button>
-        <button class="category-btn" onclick="filterCategory('Chaquetas')">Chaquetas</button>
-        <button class="category-btn" onclick="filterCategory('Fórmula 1')">F1</button>
-        <button class="category-btn" onclick="filterCategory('NBA / NFL')">NBA/NFL</button>
-        <button class="category-btn" onclick="filterCategory('World Cup')">World Cup</button>
-        <button class="category-btn price-btn" onclick="openPreciosModal()">💰 Precios</button>
-        <button class="category-btn guide-btn" onclick="openTallasModal()">📏 Guía de Tallas</button>
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Categorías</h3>
+            <button class="close-sidebar" onclick="toggleSidebar()">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <button class="side-btn active" onclick="filterCategory('all')">Todo</button>
+            <button class="side-btn" onclick="filterCategory('LaLiga')">LaLiga</button>
+            <button class="side-btn" onclick="filterCategory('Premier League')">Premier League</button>
+            <button class="side-btn" onclick="filterCategory('Bundesliga')">Bundesliga</button>
+            <button class="side-btn" onclick="filterCategory('Serie A')">Serie A</button>
+            <button class="side-btn" onclick="filterCategory('Ligue 1')">Ligue 1</button>
+            <button class="side-btn" onclick="filterCategory('Retro')">Retro</button>
+            <button class="side-btn" onclick="filterCategory('MIX')">MIX</button>
+            <button class="side-btn" onclick="filterCategory('Chándal')">Chándal</button>
+            <button class="side-btn" onclick="filterCategory('Suits / Conjuntos')">Conjuntos</button>
+            <button class="side-btn" onclick="filterCategory('Chaquetas')">Chaquetas</button>
+            <button class="side-btn" onclick="filterCategory('Fórmula 1')">Fórmula 1</button>
+            <button class="side-btn" onclick="filterCategory('NBA / NFL')">NBA / NFL</button>
+            <button class="side-btn" onclick="filterCategory('World Cup')">World Cup</button>
+        </div>
+        <div class="sidebar-footer">
+            <button class="side-btn price-btn" onclick="openPreciosModal()">💰 Precios</button>
+            <button class="side-btn guide-btn" onclick="openTallasModal()">📏 Tallas</button>
+        </div>
     </nav>
 
     <main id="gallery" class="products-container">

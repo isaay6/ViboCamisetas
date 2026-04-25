@@ -7,8 +7,15 @@ const modal = document.getElementById('productModal');
 const modalImage = document.getElementById('modalImage');
 const modalCategory = document.getElementById('modalCategory');
 const whatsappLink = document.getElementById('whatsappLink');
+const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
 
 let currentFilter = 'all';
+
+function toggleSidebar() {
+    sidebar.classList.toggle('active');
+    sidebarOverlay.classList.toggle('active');
+}
 
 function createProductCard(product) {
     const card = document.createElement('div');
@@ -33,7 +40,6 @@ function renderProducts(filter = 'all') {
         ? products 
         : products.filter(p => p.category === filter);
 
-    // Limit initial render
     const toRender = filteredProducts.slice(0, 200); 
 
     toRender.forEach(product => {
@@ -58,9 +64,10 @@ function renderMore(allProducts, startIndex) {
 
 function addLoadMore(allProducts, nextIndex) {
     const loadMore = document.createElement('button');
-    loadMore.className = 'category-btn';
+    loadMore.className = 'side-btn'; // Use sidebar button style
     loadMore.style.gridColumn = '1 / -1';
     loadMore.style.margin = '2rem auto';
+    loadMore.style.textAlign = 'center';
     loadMore.innerText = 'Cargar más camisetas...';
     loadMore.onclick = () => {
         loadMore.remove();
@@ -72,16 +79,21 @@ function addLoadMore(allProducts, nextIndex) {
 function filterCategory(category) {
     currentFilter = category;
     
-    // Update active button
-    document.querySelectorAll('.category-btn').forEach(btn => {
+    // Update active button in sidebar
+    document.querySelectorAll('.side-btn').forEach(btn => {
         btn.classList.remove('active');
-        // Match by exact onclick string to avoid partial matches
         if (btn.getAttribute('onclick') === `filterCategory('${category}')`) {
             btn.classList.add('active');
         }
     });
 
     renderProducts(category);
+    
+    // Close sidebar on mobile/desktop after selection
+    if (sidebar.classList.contains('active')) {
+        toggleSidebar();
+    }
+    
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
@@ -133,23 +145,6 @@ function closePreciosModal() {
     document.body.style.overflow = 'auto';
 }
 
-// Global click handler for modals
-window.onclick = (event) => {
-    if (event.target == modal) closeModal();
-    if (event.target == tallasModal) closeTallasModal();
-    if (event.target == preciosModal) closePreciosModal();
-};
-
-// Back to Top visibility
-const backToTopBtn = document.getElementById('backToTop');
-window.onscroll = () => {
-    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        backToTopBtn.classList.add('visible');
-    } else {
-        backToTopBtn.classList.remove('visible');
-    }
-};
-
 // FAQ Accordion
 document.querySelectorAll('.faq-question').forEach(q => {
     q.onclick = () => {
@@ -171,23 +166,36 @@ const notifications = [
 function showNotification() {
     const notifyDiv = document.getElementById('activityNotify');
     const notifyText = document.getElementById('notifyText');
+    if (!notifyDiv) return;
     
-    // Choose random message
     const randomMsg = notifications[Math.floor(Math.random() * notifications.length)];
     notifyText.innerText = randomMsg;
-    
-    // Show
     notifyDiv.classList.add('show');
     
-    // Hide after 5s
     setTimeout(() => {
         notifyDiv.classList.remove('show');
     }, 5000);
 }
 
-// Start notifications loop
-setInterval(showNotification, 15000); // Every 15 seconds
-setTimeout(showNotification, 3000); // First one after 3 seconds
+setInterval(showNotification, 15000);
+setTimeout(showNotification, 3000);
+
+// Global click handler for modals
+window.onclick = (event) => {
+    if (event.target == modal) closeModal();
+    if (event.target == tallasModal) closeTallasModal();
+    if (event.target == preciosModal) closePreciosModal();
+};
+
+// Back to Top visibility
+const backToTopBtn = document.getElementById('backToTop');
+window.onscroll = () => {
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+};
 
 // Initial Render
 window.onload = () => {
